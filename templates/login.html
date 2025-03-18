@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funza Mama - Login</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #D17D98, #F4CCE9);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #FFF3F3;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #7D1C4A;
+            font-size: 24px;
+        }
+        .input-field {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #D17D98;
+            border-radius: 5px;
+            background: #FAE3E3;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #7D1C4A;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #56021F;
+        }
+        .signup-link {
+            margin-top: 15px;
+            color: #7D1C4A;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Funza Mama</h1>
+        <input type="text" class="input-field" placeholder="Username">
+        <input type="password" class="input-field" placeholder="Password">
+        <button class="btn">Login</button>
+        <p class="signup-link">Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+    </div>
+</body>
+</html>

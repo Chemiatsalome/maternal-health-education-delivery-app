@@ -1,0 +1,94 @@
+body { 
+    background-color: #F4CCE9; /* Soft Pastel Pink */
+    text-align: center; 
+    font-family: Arial, sans-serif;
+    color: #5A3E36; /* Deep Brown for text */
+}
+
+.custom-nav { 
+    background-color: #7D1C4A; /* Deep Wine Purple */
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.card { 
+    max-width: 500px; 
+    margin: auto; 
+    margin-top: 20px; 
+    padding: 20px; 
+    background-color: #FAE3E3; /* Light Pink for game containers */
+    border-radius: 15px; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.options button { 
+    width: 100%; 
+    margin-top: 10px; 
+    background-color: #7D1C4A; /* Deep Wine Purple */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.options button:hover { 
+    background-color: #D17D98; /* Warm Pink */
+}
+
+.correct { 
+    background-color: #4CAF50; /* Green for correct choices */
+    color: white;
+    font-weight: bold;
+}
+
+.incorrect { 
+    background-color: #FF6B6B; /* Soft Red for incorrect choices */
+    color: white;
+    font-weight: bold;
+    animation: shake 0.5s;
+}
+
+.avatar-container { 
+    text-align: center; 
+    margin-bottom: 15px; 
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #D17D98; /* Warm Pink */
+    animation: bounce 1s infinite ease-in-out;
+}
+
+
+.feedback-text { 
+    font-weight: bold; 
+    background-color: #FFFAE6; /* Pale Yellow for speech bubbles */
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .progress-container { width: 100%; background-color: #ddd; border-radius: 10px; margin-top: 10px; }
+        .progress-bar { height: 15px; background-color: #FF6F61; width: 0%; border-radius: 10px; transition: width 0.5s; }
+        .btn-ask { background-color: #FF6F61; color: white; }
