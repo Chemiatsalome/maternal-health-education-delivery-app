@@ -32,13 +32,13 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="{{ url_for('login') }}" class="btn btn-outline-light me-2">Play</a> 
+                        <a href="{{ url_for('gamestages.game') }}" class="btn btn-outline-light me-2">Play</a> 
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url_for('login') }}" class="btn btn-outline-light me-2">Login</a> 
+                        <a href="{{ url_for('login.login') }}" class="btn btn-outline-light me-2">Login</a> 
                     </li>
                     <li class="nav-item">
-                        <a href="{{ url_for('signup') }}" class="btn btn-outline-light me-2">Signup</a> 
+                        <a href="{{ url_for('signup.signup') }}" class="btn btn-outline-light me-2">Signup</a> 
                     </li>
                     
                 </ul>
@@ -70,7 +70,7 @@
             <img src="{{ url_for('static', filename='images/mama.jpg') }}" class="welcome-image">
             <p class="subtitle">An Interactive Maternal Health Learning Game</p>
             <p>Learn about pregnancy stages through a fun and engaging journey!</p>
-            <a href="{{ url_for('game') }}" class="play-btn">
+            <a href="{{ url_for('gamestages.game') }}" class="play-btn">
                 <i class="fas fa-play"></i> Play
             </a>
             
@@ -78,16 +78,20 @@
              <!-- 💬 Ask Funza (Bottom Left) -->
         <button class="ask-funza-btn" onclick="toggleChat()">Ask Funza</button>
 
-        <!-- Chatbot Popup -->
-        <div class="chatbot-popup" id="chatbot">
-            <div class="chatbot-header">
-            <span>FunzaMama Chat</span>
-            <button class="close-chat" onclick="toggleChat()">×</button>
+            <!-- Chatbot Popup -->
+            <div class="chatbot-popup" id="chatbot">
+                <div class="chatbot-header">
+                    <span>FunzaMama Chat</span>
+                    <button class="close-chat" onclick="toggleChat()">×</button>
+                </div>
+                <div class="chatbot-body" id="chatbot-body">
+                    <p>Hi there! How can I help you today?</p>
+                </div>
+                <div class="chatbot-footer">
+                    <input type="text" id="user_input" placeholder="Type your message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
             </div>
-            <div class="chatbot-body">
-            <p>Hi there! How can I help you today?</p>
-            </div>
-        </div>
         
         </section>
     </div>
@@ -115,6 +119,58 @@
       if (chatBox.style.display === "block") chatBox.style.display = "none";
       else chatBox.style.display = "block";
     }
+    async function sendMessage() {
+    let userInputField = document.getElementById("user_input");
+    let userInput = userInputField.value.trim();
+    let chatBody = document.getElementById("chatbot-body");
+
+    if (!userInput) return; // Ignore empty messages
+
+    // Create user message element
+    let userMessage = document.createElement("div");
+    userMessage.classList.add("user-message");
+    userMessage.textContent = userInput;
+    chatBody.appendChild(userMessage);
+
+    // Clear input field & disable button
+    userInputField.value = "";
+    userInputField.disabled = true;
+
+    // Auto-scroll to the latest message
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    try {
+        let response = await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ "message": userInput })
+        });
+
+        let data = await response.json();
+
+        // Create bot message element
+        let botMessage = document.createElement("div");
+        botMessage.classList.add("bot-message");
+        botMessage.innerHTML = data.response; // ✅ Renders HTML properly
+        chatBody.appendChild(botMessage);
+
+    } catch (error) {
+        console.error("Error:", error);
+        let errorMessage = document.createElement("div");
+        errorMessage.classList.add("bot-message");
+        errorMessage.style.color = "red";
+        errorMessage.textContent = "Error: Unable to connect. Try again later.";
+        chatBody.appendChild(errorMessage);
+    }
+
+    // Re-enable input field
+    userInputField.disabled = false;
+    userInputField.focus();
+
+    // Auto-scroll to the latest message
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

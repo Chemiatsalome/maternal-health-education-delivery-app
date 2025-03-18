@@ -1,38 +1,35 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from models import db  # Import db from models/__init__.py
+from models.models import User, Badge, GameStage, AIResponse  # Import models
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+app.config.from_object('config.Config')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
+db.init_app(app)
+migrate = Migrate(app, db)
 
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
 
-@app.route('/game')
-def game():
-    return render_template('game.html')
+# Import models to register them
+with app.app_context():
+    from models.models import *
 
-@app.route('/preconception')
-def preconception():
-    return render_template('preconception.html')
 
-@app.route('/prenatal')
-def prenatal():
-    return render_template('prenatal.html')
+from routes.auth_routes import Login_bp, signup_bp
+from routes.system_routes import home_bp, gamestages_bp
+from routes.gamestage_routes import preconceptionstage_bp, prenatalstage_bp , birthstage_bp , postnatalstage_bp
+# Register Blueprints (modular routes)
+app.register_blueprint(Login_bp)
+app.register_blueprint(signup_bp)
+app.register_blueprint(home_bp)
+app.register_blueprint(gamestages_bp)
+app.register_blueprint(preconceptionstage_bp)
+app.register_blueprint(prenatalstage_bp)
+app.register_blueprint(birthstage_bp )
+app.register_blueprint(postnatalstage_bp)
 
-@app.route('/birth')
-def birth():
-    return render_template('birth.html')
-
-@app.route('/postnatal')
-def postnatal():
-    return render_template('postnatal.html')
 
 
 if __name__ == '__main__':

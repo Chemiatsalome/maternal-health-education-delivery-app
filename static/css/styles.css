@@ -114,6 +114,26 @@ body {
 }
 
 
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        color: #856404;
+    }
 
 /* 🌸 Badges */
 .badge-container {
@@ -362,6 +382,7 @@ body {
 /* 💬 Ask Funza (Bottom Left) */
 
 
+  /* "Ask Funza" Button - Bottom Left */
   .ask-funza-btn {
     margin-left: 10px;
     background: #7D1C4A;
@@ -374,46 +395,127 @@ body {
     z-index: 10;
     transition: background 0.3s;
   }
-  .ask-funza-btn:hover {
+.ask-funza-btn:hover {
     background: #56021F;
-  }
-  
-  /* Chatbot Popup */
-  .chatbot-popup {
+    transform: scale(1.05);
+}
+
+/* Chatbot Popup */
+.chatbot-popup {
     display: none;
     position: fixed;
     bottom: 80px;
     left: 20px;
-    width: 300px;
+    width: 320px;
     max-width: 90%;
     background: white;
     border: 2px solid #7D1C4A;
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 20;
-  }
-  .chatbot-header {
+    z-index: 200;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Chatbot Header */
+.chatbot-header {
     background: #7D1C4A;
     color: white;
-    padding: 10px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  .chatbot-body {
-    padding: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  .close-chat {
+}
+
+.chatbot-header .close-chat {
     background: transparent;
     border: none;
     color: white;
     font-size: 20px;
     cursor: pointer;
-  }
+}
+
+/* Chatbot Body - Messages */
+.chatbot-body {
+    padding: 12px;
+    max-height: 250px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* User Message */
+.user-message {
+    background: #7D1C4A;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    align-self: flex-end;
+    max-width: 80%;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+/* Bot Message */
+.bot-message {
+    background: #f1f1f1;
+    color: black;
+    padding: 8px 12px;
+    border-radius: 10px;
+    align-self: flex-start;
+    max-width: 80%;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+/* Chatbot Footer (Input & Send Button) */
+.chatbot-footer {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+
+#user_input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+.chatbot-footer button {
+    background: #7D1C4A;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.chatbot-footer button:hover {
+    background: #56021F;
+}
+
+/* Smooth Scroll for Messages */
+.chatbot-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chatbot-body::-webkit-scrollbar-thumb {
+    background: #7D1C4A;
+    border-radius: 10px;
+}
+
+.chatbot-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 
 /* The main game slider container */
 .game-slider {

@@ -12,14 +12,14 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark custom-nav">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url_for('home') }}">Welcome, SalomeMonthe</a>
+      <a class="navbar-brand" href="{{ url_for('home.home') }}">Welcome, SalomeMonthe</a>
       <ul class="navbar-nav">
         
         <li class="nav-item">
-            <a href="{{ url_for('game') }}" class="btn btn-outline-light me-2">Back</a> 
+            <a href="{{ url_for('gamestages.game') }}" class="btn btn-outline-light me-2">Back</a> 
         </li>
         <li class="nav-item">
-            <a href="{{ url_for('home') }}" class="btn btn-outline-light me-2">Logout</a> 
+            <a href="{{ url_for('login.logout') }}" class="btn btn-outline-light me-2">Logout</a> 
         </li>
         
     </ul>
@@ -32,6 +32,15 @@
   
 
     <div id="quizCard" class="card shadow">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
       <div class="avatar-container">
         <img id="avatar" src="static/images/woman1/avatar3-happy.png" alt="Avatar" class="avatar-img">
       </div>
@@ -199,7 +208,7 @@ function retryQuiz() {
   
     function completeQuiz() {
       alert("You can still attempt this stage to get different questions!");
-      window.location.href = "{{ url_for('game') }}";
+      window.location.href = "{{ url_for('gamestages.game') }}";
     }
   
     document.addEventListener("DOMContentLoaded", function () {
