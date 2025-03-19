@@ -12,14 +12,17 @@ def home():
     if request.method == 'POST':  # Chatbot logic
         data = request.get_json()
         user_message = data.get('message', '')
+        user_role = data.get('user_role', 'Curious Learner')  # Default role
+        language = data.get('language', 'English')  # Default language
 
         if not user_message:
             return jsonify({"error": "Message is required"}), 400
 
-        bot_response = get_chatbot_response(user_message)
+        bot_response = get_chatbot_response(user_message, language, user_role)
         return jsonify({"response": bot_response})
 
     return render_template('index.html')  # Normal page load
+
 
 @gamestages_bp.route('/gamestages')
 def game():

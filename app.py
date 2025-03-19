@@ -20,6 +20,7 @@ with app.app_context():
 from routes.auth_routes import Login_bp, signup_bp
 from routes.system_routes import home_bp, gamestages_bp
 from routes.gamestage_routes import preconceptionstage_bp, prenatalstage_bp , birthstage_bp , postnatalstage_bp
+from routes.gamelogic import quiz_bp
 # Register Blueprints (modular routes)
 app.register_blueprint(Login_bp)
 app.register_blueprint(signup_bp)
@@ -29,6 +30,7 @@ app.register_blueprint(preconceptionstage_bp)
 app.register_blueprint(prenatalstage_bp)
 app.register_blueprint(birthstage_bp )
 app.register_blueprint(postnatalstage_bp)
+app.register_blueprint(quiz_bp)
 
 
 
